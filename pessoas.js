@@ -2,15 +2,37 @@ class Cadastro{
     constructor(lista){
         this.lista=lista
     }
-    calcularMasculinos(){
+    contarMasculino(){
         var masculino = 0
         for(var i = 0; i<this.lista.length; i++){
             if (this.lista[i].sexo=="M"){
                 masculino ++
             }else {masculino = masculino}
-        } return masculino
+        }
+        // somar idades masculinos
+        var idademasc = 0
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="M"){
+                idademasc += this.lista[i].idade
+            }else {idademasc = idademasc}
+        }
+        // Ver maior idade masculinos
+        var maiormasc = this.lista[0].idade
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="M" && maiormasc< this.lista[i].idade){
+                maiormasc = this.lista[i].idade
+            }else {maiormasc = maiormasc}
+        } 
+        // Ver menor idade masculinos
+        var menormasc = this.lista[0].idade
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="M" && menormasc> this.lista[i].idade){
+                menormasc = this.lista[i].idade
+            }else {menormasc = menormasc}
+        }
+        return `Masculino: ${masculino} Cadastros; Menor idade é: ${menormasc}; Maior idade é: ${maiormasc}; A média de idade é:${(idademasc/masculino).toFixed(1)}`
     }
-    calcularFemininos(){
+    contarFeminino(){
         var feminino = 0
         for(var i = 0; i<this.lista.length; i++){
             if (this.lista[i].sexo=="F"){
@@ -18,7 +40,7 @@ class Cadastro{
             }else {feminino = feminino}
         } return feminino
     }
-    calcularIdade(){
+    contarIdade(){
         var crianca = 0
         var adolecente = 0
         var adulto = 0
@@ -59,8 +81,8 @@ function clique(){
     p = new Pessoas (name, genero, age)
     m.lista.push(p)
     console.log(p)
-    masculino.innerHTML = `<div>Masculino: ${m.calcularMasculinos()}</div>`
-    feminino.innerHTML = `<div>Feminino: ${m.calcularFemininos()}</div>`
-    imprimiridade.innerHTML = `${m.calcularIdade()}`
+    masculino.innerHTML = `${m.contarMasculino()}`
+    feminino.innerHTML = `<div>Feminino: ${m.contarFeminino()}</div>`
+    imprimiridade.innerHTML = `${m.contarIdade()}`
 
 }
