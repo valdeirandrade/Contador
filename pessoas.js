@@ -2,44 +2,6 @@ class Cadastro{
     constructor(lista){
         this.lista=lista
     }
-    contarMasculino(){
-        var masculino = 0
-        for(var i = 0; i<this.lista.length; i++){
-            if (this.lista[i].sexo=="M"){
-                masculino ++
-            }else {masculino = masculino}
-        }
-        // somar idades masculinos
-        var idademasc = 0
-        for(var i = 0; i<this.lista.length; i++){
-            if (this.lista[i].sexo=="M"){
-                idademasc += this.lista[i].idade
-            }else {idademasc = idademasc}
-        }
-        // Ver maior idade masculinos
-        var maiormasc = this.lista[0].idade
-        for(var i = 0; i<this.lista.length; i++){
-            if (this.lista[i].sexo=="M" && maiormasc< this.lista[i].idade){
-                maiormasc = this.lista[i].idade
-            }else {maiormasc = maiormasc}
-        } 
-        // Ver menor idade masculinos
-        var menormasc = this.lista[0].idade
-        for(var i = 0; i<this.lista.length; i++){
-            if (this.lista[i].sexo=="M" && menormasc> this.lista[i].idade){
-                menormasc = this.lista[i].idade
-            }else {menormasc = menormasc}
-        }
-        return `Masculino: ${masculino} Cadastros; Menor idade é: ${menormasc}; Maior idade é: ${maiormasc}; A média de idade é:${(idademasc/masculino).toFixed(1)}`
-    }
-    contarFeminino(){
-        var feminino = 0
-        for(var i = 0; i<this.lista.length; i++){
-            if (this.lista[i].sexo=="F"){
-                feminino ++
-            }else {feminino = feminino}
-        } return feminino
-    }
     contarIdade(){
         var crianca = 0
         var adolecente = 0
@@ -56,6 +18,67 @@ class Cadastro{
         }
             }
         } return `<div>Crianças: ${crianca}</div><div>Adolecentes: ${adolecente}</div><div>Adultos: ${adulto}</div><div>Idosos: ${idoso}</div>`
+    }
+
+    contarMasculino(){
+        //cria um array para colocarmos apenas as idades dos cadastros
+        var masculino = []
+        var feminino = []
+        
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="M"){
+                masculino.push(this.lista[i].idade)                          
+            }else {feminino.push(this.lista[i].idade)}
+        }
+        var idademasc = 0
+        for(var i = 0; i<masculino.length; i++){
+            idademasc += masculino[i]
+        }
+        var mediamasc = idademasc/masculino.length
+        
+        var maiormasc = masculino[0]
+        for(var i = 0; i<masculino.length; i++){
+            if (maiormasc< masculino[i]){
+                maiormasc = masculino[i]
+            }else {maiormasc = maiormasc}}
+
+        var menormasc = masculino[0]
+        for(var i = 0; i<masculino.length; i++){
+            if (menormasc> masculino[i]){
+                menormasc = masculino[i]
+            }else {menormasc = menormasc}
+        }
+        return `Masculino: ${masculino.length} Cadastros; Menor idade é: ${menormasc}; Maior idade é: ${maiormasc}; A média de idade é:${mediamasc.toFixed(1)}`
+    }
+    contarFeminino(){
+        var feminino = 0
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="F"){
+                feminino ++
+            }else {feminino = feminino}
+        } 
+        // somar idades femininos
+        var idadefem = 0
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="F"){
+                idadefem += this.lista[i].idade
+            }else {idadefem = idadefem}
+        }
+        // Ver maior idade femininos
+        var maiorfem = this.lista[0].idade
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="F" && maiorfem< this.lista[i].idade){
+                maiorfem = this.lista[i].idade
+            }else {maiorfem = maiorfem}
+        } 
+        // Ver menor idade femininos
+        var menorfem = this.lista[0].idade
+        for(var i = 0; i<this.lista.length; i++){
+            if (this.lista[i].sexo=="M" && menorfem> this.lista[i].idade){
+                menorfem = this.lista[i].idade
+            }else {menorfem = menorfem}
+        }
+        return `Feminino: ${feminino} Cadastros; Menor idade é: ${menorfem}; Maior idade é: ${maiorfem}; A média de idade é:${(idadefem/feminino).toFixed(1)}`
     }
 
 
@@ -82,7 +105,7 @@ function clique(){
     m.lista.push(p)
     console.log(p)
     masculino.innerHTML = `${m.contarMasculino()}`
-    feminino.innerHTML = `<div>Feminino: ${m.contarFeminino()}</div>`
+    feminino.innerHTML = `${m.contarFeminino()}`
     imprimiridade.innerHTML = `${m.contarIdade()}`
 
 }
